@@ -1,0 +1,27 @@
+.card {
+  position: relative;
+}
+
+.number-list {
+  position: relative;
+  width: 20px;
+  height: 30px;
+  background-color: var(--info);
+  color: white;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.number-list p {
+  position: absolute;
+  display: block;
+  top: 2px;
+  left: 3px;
+  margin: 0 auto;
+  /* padding: 1rem; */
+}
+
+.custom-pagination ::ng-deep .ngx-pagination .current {
+  background: var(--info);
+}
+

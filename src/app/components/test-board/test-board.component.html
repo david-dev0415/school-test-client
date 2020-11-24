@@ -1,0 +1,103 @@
+<!-- <div class="text-white">
+  <h1 class="animated fadeIn fast text-white">Question board component</h1>
+  <p class="animated fadeIn">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias obcaecati quo odit
+    aperiam, placeat beatae quia!
+    Architecto, modi incidunt soluta dolor dignissimos voluptate possimus illo vitae commodi magni non voluptatem
+    officiis voluptates cumque nihil, consequuntur ipsa quos doloribus delectus cupiditate laudantium perferendis! Ex
+    dolore sint voluptates nesciunt nostrum sapiente odit.</p>
+</div> -->
+
+<app-navbar></app-navbar>
+
+<div class="jumbotron jumbotron-fluid text-white bg-info p-5">
+  <h1 class="display-4">Tablero de pruebas</h1>
+  <hr class="my-4">
+  <p class="lead px-3">
+    Aquí podrás gestionar las pruebas que desees crear.</p>
+</div>
+
+
+<div class="card mx-3 pb-3">
+  <div class="card-header">
+    <div class="d-flex">
+      <div class="mr-auto p-2">
+        <h3 class="justify-content-start">Grupo de pruebas</h3>
+      </div>
+      <div class="p-2">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" data-backdrop="static"
+          data-keyboard="false" data-target="#createNewGroup">
+          Crear grupo
+          <i class="fas fa-plus-circle"></i>
+        </button>
+        <button class="ml-1 btn btn-sm btn-outline-info" data-toggle="tooltip" data-placement="top" title="Refrescar"
+          (click)="groupsRecords()">
+          <i class="fas fa-sync"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+    <div class="row">
+      <app-card-group class="col-6 mb-3 animated fadeIn" [group]="group" *ngFor="let group of groups"></app-card-group>
+    </div>
+    <!-- Mensaje para cuándo no hay grupos creados -->
+    <div *ngIf="messageNoData" class="row animated fadeInUp">
+      <div class="alert alert-info w-100" role="alert">
+        <h4 class="alert-heading">Oops, no hay grupos creados!</h4>
+        <p class="text-muted">La creación de un grupo de pruebas te permite tener mejor gestión del control de
+          preguntas.</p>
+        <hr>
+        <p class="mb-0">Puedes empezar creando un grupo.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div [hidden]="ismodelShow" class="modal fade" id="createNewGroup" tabindex="-1" role="dialog"
+  aria-labelledby="createNewGrouplLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createNewGroupLabel py-1">
+          Grupo<span *ngIf="groupTemplate.groupName">:</span>
+          <span class="text-info"> {{ groupTemplate.groupName }}</span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form autocomplete="off" #f_group="ngForm" (ngSubmit)="onSubmit(f_group)">
+          <div class="form-group col">
+            <label for="inputgroupName">Nombre de grupo</label>
+            <input type="text" name="groupName" [(ngModel)]="groupTemplate.groupName" class="form-control"
+              id="inputgroupName" placeholder="Ingresa el nombre del grupo" required>
+            <small *ngIf="!f_group.submitted" id="emailHelp" class="form-text text-muted">
+              Nombre al grupo de preguntas que vas a crear.
+            </small>
+            <small *ngIf="f_group.submitted && f_group.controls['groupName'].errors"
+              class="invalid animated fadeIn mt-1">
+              El campo Nombre de grupo es obligatorio.
+            </small>
+          </div>
+          <div class="form-group col">
+            <label for="inputDescription">Descripción</label>
+            <textarea type="text" name="descriptionGroup" [(ngModel)]="groupTemplate.description" class="form-control"
+              style="min-height: 50px; max-height: 100px;" rows="2" id="inputDescription"></textarea>
+            <small id="emailHelp" class="form-text text-muted">La descripción del grupo es opcional.</small>
+          </div>
+          <div class="form-group">
+            <button type="submit" id="btn-modal" class="btn btn-block btn-sm btn-outline-primary">Crear grupo</button>
+            <small id="emailHelp" class="form-text text-muted"></small>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <app-principal-card></app-principal-card> -->
+
+<!-- <app-question></app-question> -->

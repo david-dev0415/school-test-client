@@ -1,0 +1,113 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --blue: #3575d1;
+  --blue-dark: #212b6b;
+  --purple: #3a1967;
+  --white: #fff;
+  --dark-mode: #323941;
+  --dark-mode-s: #1a1e21;
+}
+
+body {
+  font-family: "Lato", "sans-serif";
+  min-height: 100vh;
+  background-image: radial-gradient(circle, #3575d1, #3a1967);
+  background-repeat: no-repeat;
+}
+
+.logo-tmp {
+  text-align: center;
+  color: white;
+  font-size: 5em;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  padding-top: 1em;
+}
+
+.form-background {
+  position: relative;
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.19);
+  border-radius: 25px;
+  margin: 0 auto;
+}
+
+.form__title {
+  background-color: white;
+  font-weight: 300;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  text-align: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 15px;
+  width: 100%;
+}
+
+/* .form-group, .form-row {
+  padding: 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+} */
+
+.form-group,
+.form-row {
+  padding: 0 3rem;
+  width: 100%;
+}
+
+/* Remove style Bootstrap */
+input[type="checkbox"],
+input[type="radio"] {
+  transform: scale(1.3);
+}
+
+.input-group-text {
+  background-color: transparent;
+  border: none;
+}
+
+.form-control--noborder {
+  outline: none;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #eee;
+  font-size: 1em;
+}
+
+.form-control--noborder:focus {
+  background-color: transparent;
+  box-shadow: none !important;
+}
+
+.abs-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+
+/* Clase para presentar error de formulario */
+.invalid {
+  border-radius: .25rem;
+  background-color: rgba(255, 255, 255,.7);
+  color: #dc3545;  
+}
+
+.message-form-text { 
+  margin-top: -10px;
+}
+
+.span-title {
+  position: relative;
+  top: 5px;
+  margin-right: 5px;
+}
+
+.none-returnBack {
+  opacity: 0.5 !important; 
+  pointer-events: none;
+  color: red !important;
+}

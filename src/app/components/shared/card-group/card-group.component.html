@@ -1,0 +1,9 @@
+<div class="card text-center">
+  <div class="card-body">
+    <h5 class="card-title">{{ group.groupName }}</h5>
+    <p class="card-text text-muted">
+      {{ group.description || 'Sin descripción' }}
+    </p>
+    <a (click)="seeGroup(group)" class="btn btn-sm btn-outline-primary mx-1">Ver más</a>    
+  </div>
+</div>

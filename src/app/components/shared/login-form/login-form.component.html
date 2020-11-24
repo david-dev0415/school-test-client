@@ -1,0 +1,84 @@
+<div class="container p-3">
+  <div class="row px-3">
+    <div class="col align-items-center my-auto">
+
+      <!-- Form: Index as student -->
+      <form *ngIf="formDefault == 0" class="form-background animated fadeIn" autocomplete="off" #f_student="ngForm"
+        (ngSubmit)="onSubmit(f_student)">
+
+        <!-- Título del form -->
+        <h3 class="form__title animated fadeIn ">Comienza tu prueba</h3>
+
+        <!-- Campo para el nombre completo o nombre de usuario -->
+        <div class="form-group text-white">
+          <label for="inputFullName">Nombre completo</label>
+          <input type="text" name="fullName" [(ngModel)]="userStudent.fullName" class="form-control" id="inputFullName"
+            required placeholder="Ingrese nombres y apellidos" pattern="^[a-zA-Z ]+$">
+        </div>
+
+        <!-- Campo para el grado -->
+        <div class="form-group text-white">
+          <label for="inputGrade">Grado</label>
+          <input type="text" name="grade" [(ngModel)]="userStudent.grade" class="form-control" id="inputGrade" required
+            placeholder="Ingrese el grado que cursa" maxlength="4">          
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block text-uppercase">Empezar</button>
+        </div>
+
+        <!-- <hr class="hr-white"> -->
+        <div class="form-group">
+          <div class="divider div-transparent div-dot"></div>
+        </div>
+
+        <div class="form-group">
+          <button type="button" class="btn btn-dark btn-block text-uppercase" (click)="formDefault = 1">Ingresar como
+            admin</button>
+        </div>
+
+      </form>
+
+      <!-- Form: Login -->
+      <form *ngIf="formDefault == 1" class="form-background form-background animated fadeInDown" autocomplete="off"
+        #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+        <h3 class="form__title">Inicio de sesión</h3>
+
+        <!-- Campo para el nombre completo o nombre de usuario -->
+        <div class="form-group text-white">
+          <label for="inputFullName">Correo</label>
+          <input type="text" name="email" [(ngModel)]="user.email" class="form-control" id="inputFullName" required
+            placeholder="Ingrese su correo registrado">
+          <small *ngIf="f.submitted && f.controls['email'].errors" class="invalid animated fadeIn mt-1">
+            El campo de correo es obligatorio.</small>
+        </div>
+
+        <!-- Campo para la contraseña -->
+        <div class="form-group text-white">
+          <label for="inputGrade">Contraseña</label>
+          <input type="password" name="password" [(ngModel)]="user.password" class="form-control" id="inputPassword"
+            required placeholder="Ingrese su contraseña">
+          <small *ngIf="f.submitted && f.controls['password'].errors" class="invalid animated fadeIn mt-1">El campo de
+            Contraseña es obligatorio.</small>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block text-uppercase">Iniciar sesión</button>
+        </div>
+
+        <!-- <hr class="hr-white"> -->
+        <div class="form-group">
+          <div class="divider div-transparent div-dot"></div>
+        </div>
+
+        <div class="form-group">
+          <button type="button" class="btn btn-dark btn-block text-uppercase" (click)="formDefault = 0">Quiero hacer la
+            prueba</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

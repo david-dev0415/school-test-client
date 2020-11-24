@@ -1,0 +1,8 @@
+{
+  "/api/*": {
+    "target": "https://us-central1-matematicas-vivas.cloudfunctions.net",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

@@ -1,0 +1,99 @@
+<!-- Mostrar preguntas -->
+<!-- <img class="card-img-top" src="#" alt="Imagen de la pregunta (solo si tiene)"> -->
+<div class="card-body">
+  <h5 class="card-title">Pregunta: {{ index + 1 }}</h5>
+  <p class="card-text text-muted">{{ questions.question }}</p>
+  <hr class="bg-gray">
+  <div class="">
+
+    <form>
+      <!-- Selección de verdadero o falso -->
+      <div *ngIf="questions.typeOfQuestion == '1'">
+        <div class="form-row">
+          <h6>Respuesta</h6>
+          <!-- Respuesta: verdadero -->
+          <div class="form-row pl-3">
+            <div class="form-check checkbox-inline pr-3">
+              <input type="radio" class="form-check-input" id="inlineRadio_true"
+                [checked]="questions.selectionTrueOrFalse" disabled>
+              <label class="form-check-label" for="inlineRadio_true">
+                {{ questions.selectionTrueOrFalse == "true" ? 'Verdadero' : 'Falso' }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selección de multiple respuesta -->
+      <div *ngIf="questions.typeOfQuestion == '0'">
+        <div class="form-row">
+          <h6>Respuesta</h6>
+          <!-- Respuesta: verdadero -->
+          <div class="form-row">
+            <div class="form-group col">
+              <!-- Opciones: A, B, C, D -->
+              <div class="input-group">
+                <span class="mt-2 mr-1 letter text-uppercase">A.</span>
+                <input type="text" name="answer_a" class="form-control form-control--noborder mt-1"
+                  [value]="questions.multipleChoiceAnswer['answer_a']" disabled>
+
+                <div class="input-group-text">
+                  <input type="radio" name="correctAnswer" class="form-check-input form-control--noborder mt-1 ml-1"
+                    value="a" [checked]="(questions.multipleChoiceAnswer['correctAnswer'] == 'a')" disabled>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <span class="mt-2 mr-1 letter text-uppercase">B.</span>
+                <input type="text" name="answer_b" class="form-control form-control--noborder mt-1"
+                  [value]="questions.multipleChoiceAnswer['answer_b']" disabled>
+
+                <div class="input-group-text">
+                  <input type="radio" name="correctAnswer" class="form-check-input form-control--noborder mt-1 ml-1"
+                    value="b" [checked]="(questions.multipleChoiceAnswer['correctAnswer'] == 'b')" disabled>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <span class="mt-2 mr-1 letter text-uppercase">C.</span>
+                <input type="text" name="answer_c" class="form-control form-control--noborder mt-1"
+                  [value]="questions.multipleChoiceAnswer['answer_c']" disabled>
+
+                <div class="input-group-text">
+                  <input type="radio" name="correctAnswer" class="form-check-input form-control--noborder mt-1 ml-1"
+                    value="c" [checked]="(questions.multipleChoiceAnswer['correctAnswer'] == 'c')" disabled>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <span class="mt-2 mr-1 letter text-uppercase">D.</span>
+                <input type="text" name="answer_d" class="form-control form-control--noborder mt-1"
+                  [value]="questions.multipleChoiceAnswer['answer_d']" disabled>
+
+                <div class="input-group-text">
+                  <input type="radio" name="correctAnswer" class="form-check-input form-control--noborder mt-1 ml-1"
+                    value="d" [checked]="(questions.multipleChoiceAnswer['correctAnswer'] == 'd')" disabled>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<div class="card-footer bg-light">
+  <div class="d-flex">
+    <small class="mt-2 text-actions text-uppercase">Acciones</small>
+    <button type="button" class="mr-3 ml-auto btn btn-sm btn-outline-warning" (click)="updateQuestionModal(questions)">
+      Editar pregunta
+      <i class="fas fa-edit"></i>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top"
+      title="Eliminar" (click)="deleteQuestion(questions.questionId)">
+      <i class="fas fa-trash-alt"></i>
+    </button>
+  </div>
+</div>

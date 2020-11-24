@@ -1,0 +1,160 @@
+<form class="mb-3" autocomplete="off" [formGroup]="shape" (ngSubmit)="processForm()">
+
+  <!-- Creación de pregunta -->
+  <div class="form-row">
+    <div class="form-group col-12">
+      <label for="question" class="font-weight-bold">Enunciado</label>
+      <textarea type="text" formControlName="question" rows="4" class="form-control" id="question"
+        style="min-height: 50px; max-height: 120px;" placeholder="Ingrese el enunciado de la pregunta"
+        [class.is-invalid]="questionNoValid"></textarea>
+      <!-- Mostrar mensaje de error -->
+      <div class="invalid animated fadeIn mt-1" *ngIf="questionNoValid">
+        Debes de ingresar una pregunta.
+      </div>
+    </div>
+  </div>
+
+  <!-- Selección del tipo de respuesta -->
+  <div class="form-row">
+    <div class="form-group col-12">
+      <legend class="col-form-label font-weight-bold">Seleccione el tipo de respuesta</legend>
+      <div class="form-check form-check-inline">
+        <!-- Return: valor 0 (selección múltiple) -->
+        <input type="radio" formControlName="typeOfQuestion" class="form-check-input" id="inlineRadio_1" value="0"
+          (click)="modifyResponseType($event.target.value)" [class.is-invalid]="typeOfQuestion">
+        <label class="form-check-label" for="inlineRadio_1">Selección múltiple</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <!-- Return: valor 0 (selección verdadero o falso) -->
+        <input type="radio" formControlName="typeOfQuestion" class="form-check-input" id="inlineRadio_typeOfQuestion" value="1"
+          (click)="modifyResponseType($event.target.value)" [class.is-invalid]="typeOfQuestion">
+        <label class=" form-check-label" for="inlineRadio_typeOfQuestion">Verdadero o falso</label>
+      </div>
+    </div>
+    <div class="form-group col-12">
+      <div class="invalid animated fadeIn ml-0"
+        *ngIf="shape.get('typeOfQuestion').invalid && shape.get('typeOfQuestion').touched">
+        Debes de selecionar una opción.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Creación de respuestas: selección múltiple -->
+  <div class="container" *ngIf="showMultipleSelection">
+    <div class="form-row" formGroupName="multipleChoiceAnswer">
+      <div class="form-group col ml-3">
+        <!-- Opciones: A, B, C, D -->
+        <div class="input-group">
+          <span class="mt-2 mr-1 letter text-uppercase">A.</span>
+          <input type="text" formControlName="answer_a" class="form-control form-control--noborder mt-1">
+
+          <div class="input-group-text">
+            <input type="radio" formControlName="correctAnswer"
+              class="form-check-input form-control--noborder mt-1 ml-1" value="a" required>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <span class="mt-2 mr-1 letter text-uppercase">B.</span>
+          <input type="text" formControlName="answer_b" class="form-control form-control--noborder mt-1">
+
+          <div class="input-group-text">
+            <input type="radio" formControlName="correctAnswer"
+              class="form-check-input form-control--noborder mt-1 ml-1" value="b" required>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <span class="mt-2 mr-1 letter text-uppercase">C.</span>
+          <input type="text" formControlName="answer_c" class="form-control form-control--noborder mt-1">
+
+          <div class="input-group-text">
+            <input type="radio" formControlName="correctAnswer"
+              class="form-check-input form-control--noborder mt-1 ml-1" value="c" required>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <span class="mt-2 mr-1 letter text-uppercase">D.</span>
+          <input type="text" formControlName="answer_d" class="form-control form-control--noborder mt-1">
+
+          <div class="input-group-text">
+            <input type="radio" formControlName="correctAnswer"
+              class="form-check-input form-control--noborder mt-1 ml-1" value="d" required>
+          </div>
+        </div>        
+
+      </div>
+
+      <!-- Mensaje de check requerido -->
+      <div class="form-row pl-4">
+        <small class="form-text message-form-text" *ngIf="showMultipleSelection">
+          {{ requiredCheckAnswer }}
+        </small>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Creación de respuestas: verdadero o falso -->
+  <div class="container" *ngIf="showTrueOrFalse">
+
+    <div class="form-row" formGroupName="selectionTrueOrFalse">
+      <!-- Respuesta: verdadero -->
+      <div class="form-row pl-3">
+        <div class="form-group col">
+          <div class="form-check form-check-inline pr-3">
+            <input type="radio" formControlName="trueOrFalseAnswer" class="form-check-input" id="inlineRadio_true"
+              value="true">
+            <label class="form-check-label" for="inlineRadio_true">Verdadero</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Respuesta: falso -->
+      <div class="form-row pl-3">
+        <div class="form-group col">
+          <div class="form-check form-check-inline pr-3">
+            <input type="radio" formControlName="trueOrFalseAnswer" class="form-check-input" id="inlineRadio_false"
+              value="false">
+            <label class="form-check-label" for="inlineRadio_false">Falso</label>
+          </div>
+        </div>
+      </div>      
+    </div>    
+  </div>
+
+  
+
+  <!-- Mostrar pregunta -->
+  <div class="form-row mt-3">
+    <div class="form-group col-12">
+      <legend class="col-form-label font-weight-bold">Mostar pregunta</legend>
+      <div class="form-check form-check-inline pr-3" aria-describedby="showQuestionHelp">
+        <!-- Return: true (default) -->
+        <input class="form-check-input" type="radio" formControlName="showQuestion" id="inlineRadio_showQuestion" value="true">
+        <label class="form-check-label" for="inlineRadio_showQuestion">Sí</label>
+      </div>
+      <div class="form-check form-check-inline pl-3">
+        <input class="form-check-input" type="radio" formControlName="showQuestion" id="inlineRadio_2" value="false">
+        <label class="form-check-label" for="inlineRadio_2">No</label>
+      </div>
+     </div>
+      <small id="showQuestionHelp" class="form-text message-form-text">
+      {{ showQuestionMessage }}
+      </small>      
+  </div>
+
+  <!-- Mostrar pregunta -->
+  <div class="form-row mt-3 mb-0 pb-0">
+    <div class="form-group">
+      <button type="submit" class="btn btn-sm btn-block btn-outline-success" data-toggle="tooltip" data-placement="top" title="Guardar y crear otra pregunta">Crear otra pregunta</button>
+    </div>
+    <!-- <div class="form-group text-center">
+      
+    </div> -->
+  </div>
+
+</form>

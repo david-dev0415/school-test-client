@@ -1,0 +1,39 @@
+<div class="card mx-3 mb-4 pb-3">
+  <div class="card-header">
+
+    <div class="d-flex">
+      <div class="mr-auto p-2">
+        <h3 class="d-flex justify-content-start">{{ cardHeader }}</h3>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+    <div class="row">
+      <div class="col-sm-6 mb-3" *ngFor="let group of groups">
+        <div class="card text-center" >
+          <div class="card-body">
+            <h5 class="card-title">{{ group.groupName | titlecase }}</h5>
+            <p class="card-text text-muted">
+              {{ group.description || 'Sin descripción' | titlecase }}
+            </p>
+            <button (click)="enterQuestions(group.id)" 
+              class="btn btn-sm btn-outline-primary mx-1">
+              Entrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensaje para cuándo no hay grupos creados -->
+    <div *ngIf="messageNoData" class="row animated fadeInUp">
+      <div class="alert alert-info w-100" role="alert">
+        <h4 class="alert-heading">Oops, no hay grupos creados!</h4>
+        <p class="text-muted">Debes de esperar que el administrador se ocupe de subir las pruebas.</p>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>

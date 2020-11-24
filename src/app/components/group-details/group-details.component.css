@@ -1,0 +1,31 @@
+hr {
+  display: block; height: 1px;
+  border: 0; 
+  border-top: 1px solid var(--dark);
+ margin: 1em 0; padding: 0;
+}
+
+.form-control--noborder:focus {
+  /* border-bottom: 1px solid var(--bg-dark); */
+}
+
+.form-control--noborder:focus {
+  background-color: transparent;
+  border-bottom: 1px solid var(--dark);
+}
+
+.full-width {
+  position: relative;
+  width: 100%;
+}
+
+.position-arrow {
+  height: 50px;
+  position: relative;
+  top: 10px;
+}
+
+.text-actions {
+  font-size: .8rem;
+  letter-spacing: .1rem;
+}
